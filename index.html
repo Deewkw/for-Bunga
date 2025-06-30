@@ -1,0 +1,144 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Selamat Tinggal</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1e1e1e;
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+    }
+
+    .rain-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .raindrop {
+      position: absolute;
+      width: 2px;
+      height: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      animation: fall linear;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-20px);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+      z-index: 1;
+    }
+
+    .open-letter {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      font-size: 16px;
+      color: #f0f0f0;
+      text-align: left;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .btn-buka {
+      margin-top: 20px;
+      background-color: transparent;
+      border: 2px solid white;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 50px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.3s ease;
+    }
+
+    .btn-buka:hover {
+      background-color: white;
+      color: #1e1e1e;
+    }
+  </style>
+</head>
+<body>
+  <div class="rain-container" id="rain"></div>
+
+  <audio autoplay loop hidden>
+    <source src="James Arthur - Can I Be Him (Lyric Video)(M4A_128K).m4a" type="audio/mp4">
+    Your browser does not support the audio element.
+  </audio>
+
+  <div class="card">
+    <h2>Hey.. aku tau kamu pasti lagi tidur sekarang atau mungkin udah bangun? wkwk</h2>
+    <button class="btn-buka" onclick="typeLetter()">Buka</button>
+    <div class="open-letter" id="letter"></div>
+  </div>
+
+  <script>
+    const rainContainer = document.getElementById('rain');
+    function createDrop() {
+      const drop = document.createElement('div');
+      drop.classList.add('raindrop');
+      drop.style.left = `${Math.random() * 100}vw`;
+      drop.style.animationDuration = `${Math.random() * 0.5 + 0.5}s`;
+      rainContainer.appendChild(drop);
+      setTimeout(() => {
+        rainContainer.removeChild(drop);
+      }, 1000);
+    }
+    setInterval(() => {
+      for (let i = 0; i < 5; i++) createDrop();
+    }, 100);
+
+    const text = `Hey.. aku tau kamu pasti lagi tidur sekarang, atau mungkin udah bangun? wkwk well to be honest that hurtful night was maybe unforgettable for me, so i guess I'd stay single for now bet I can't find a girl with such a good knowledge and mindset as you. aku cuma mau cerita aja sekalian kasih fyi hehe, mau tau fun fact ga? aku sebenarnya juga orangnya jujur aviodant, well maybe karna aku ketemu orang yang tepat so another part of me take over my body?
+
+kamu ga perlu takut kalo kamu orangnya aviodant kok semua perlu waktu, mungkin emang aku bukan orang yang tepat buat kamu so i hope we'll see each other like a stranger again?
+
+aku tau gimana posisi kamu sekarang yang notabenenya emang dalam posisi "malas berhubungan" like damn i was in your position before i met YOU! wkwk maybe in the future someone who can change your position from "malas berhubungan" ke "menyukai seseorang" well atau mungkin kamu ilfeel duluan sama aku? or I'm a little annoying bastrad? wkwk i admit that i can't control myself back then
+
+thanks for everything ya bunga! you was the one who can change my perspective of falling in love! even tho i can't do anything further ahahaha!
+
+good luck with your own life.  
+god bless you.`;
+
+    let i = 0;
+    function typeLetter() {
+      const target = document.getElementById("letter");
+      target.innerHTML = '';
+      i = 0;
+      const interval = setInterval(() => {
+        target.innerHTML += text.charAt(i);
+        i++;
+        if (i >= text.length) clearInterval(interval);
+      }, 25);
+    }
+  </script>
+</body>
+</html>
